@@ -12,6 +12,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,17 +42,19 @@ public class AuthController {
 
     //회원가입버트 -> /authsignup->/auth/signin
     @PostMapping("/auth/signup")
-    public String signup(@Validated SignupDto signupDto, BindingResult bindingResult) {
-
+    public @ResponseBody String signup(@Validated SignupDto signupDto, BindingResult bindingResult) {
+    // 반환타입 string 이지만 앞에 @ResponseBody 가 붙어있으면 데이터 반환
         if (bindingResult.hasErrors()) {
             Map<String, String> errorMap = new HashMap<>();
 
             for (FieldError error : bindingResult.getFieldErrors()) {
                 errorMap.put(error.getField(), error.getDefaultMessage());
-                System.out.println("====================");
-                System.out.println(error.getDefaultMessage());
-                System.out.println("====================");
+//                System.out.println("====================");
+//                System.out.println(error.getDefaultMessage());
+//                System.out.println("====================");
             }
+            return "오류남";
+
         }
 
 
