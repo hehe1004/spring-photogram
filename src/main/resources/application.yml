@@ -21,7 +21,7 @@ spring:
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: create #create 스키마 바뀔떄 사용, 데이터 삭제됨   // none수정없을떄는 //update
+      ddl-auto: update #create 스키마 바뀔떄 사용, 데이터 삭제됨   // none수정없을떄는 //update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
