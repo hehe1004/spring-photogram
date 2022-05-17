@@ -20,6 +20,7 @@ public class PrincipalDetails implements UserDetails {
         this.user = user;
     }
 
+
     //권한을 가져오는 함수
     //권한이 한개가 아닐수있음 (3개 이상 권한)
     @Override

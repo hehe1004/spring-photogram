@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Table(
         uniqueConstraints = {
                 @UniqueConstraint(
-                        name = "subscribe-uk",
+                        name = "subscribe_uk",
                         columnNames = {"fromUserId", "toUserId"}
 
 

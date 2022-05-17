@@ -34,7 +34,7 @@ public class UserService {
 //            }
 //        });
 
-        User userEntity = userRepository.findById(10).orElseThrow(() -> {return new CustomValidationApiException("찾을수 없는 id입니다.");
+        User userEntity = userRepository.findById(id).orElseThrow(() -> {return new CustomValidationApiException("찾을수 없는 id입니다.");
 
         });
 
