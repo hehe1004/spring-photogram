@@ -12,7 +12,9 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     public String profile(@PathVariable int id){
+        System.out.println("---------------UserController-------------- ");
         System.out.println(id);
+        System.out.println("---------------UserController-------------- ");
         return "user/profile";
     }
 
@@ -21,10 +23,10 @@ public class UserController {
     public String update(@PathVariable int id, @AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
 
 
-        System.out.println("여기까지오니 ");
+        System.out.println("---------------UserController2-------------- ");
         //추천 @AuthenticationPrincipal PrincipalDetails principalDetails
         System.out.println("세션정보" + principalDetails.getUser());
-
+        System.out.println("---------------UserController2-------------- ");
 
 //        극협
 

@@ -35,9 +35,9 @@ public class UserApiController {
 
             for (FieldError error : bindingResult.getFieldErrors()) {
                 errorMap.put(error.getField(), error.getDefaultMessage());
-                System.out.println("====================");
+                System.out.println("========UserApiController============");
                 System.out.println(error.getDefaultMessage());
-                System.out.println("====================");
+                System.out.println("========UserApiController============");
             }
 
 //            return "오류남";
@@ -45,13 +45,14 @@ public class UserApiController {
             throw new CustomValidationApiException("유효성 검사 실패", errorMap);
         }else{
 
-            System.out.println("여기는 안오?");
+            System.out.println("----------------UserApiController-------------------");
             System.out.println(userUpdateDto);
             System.out.println(id);
+
             User userEntity = userService.회원수정(id, userUpdateDto.toEntity());
 
             System.out.println(userUpdateDto.toEntity().getId());
-
+            System.out.println("----------------UserApiController-------------------");
             //세션 정보 변경 해야 실시간 반영
             principalDetails.setUser(userEntity);
 

@@ -2,6 +2,7 @@ package com.cos.photogramstart.service;
 
 
 import com.cos.photogramstart.config.auth.PrincipalDetails;
+import com.cos.photogramstart.domain.image.Image;
 import com.cos.photogramstart.domain.image.ImageRepository;
 import com.cos.photogramstart.web.dto.image.ImageUploadDto;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +44,12 @@ public class ImageService {
 
 
         }
+        //image 테이블에 저장
+        Image image = imageUploadDto.ToEntity(imageFileName, principalDetails.getUser());// 이미지 파일 이름82f2d75a-ab64-4824-8720-e0c66663e90b_반사광3.png
+        Image imageEntity = imageRepository.save(image);
+        System.out.println("---------ImageService------------");
+        System.out.println(imageEntity);
+        System.out.println("---------ImageService------------");
 
     }
 }
