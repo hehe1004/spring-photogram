@@ -9,12 +9,12 @@ import org.springframework.web.multipart.MultipartFile;
 public class ImageUploadDto {
 
     private MultipartFile file;
-    private String catpion;
+    private String caption;
 
     public Image ToEntity(String postImageUrl, User user) {
 
         return Image.builder()
-                .caption(catpion)
+                .caption(caption)
                 .postImageUrl(postImageUrl)
                 .user(user)
                 .build();

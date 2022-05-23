@@ -21,6 +21,7 @@ public class Image { // 한명의 유저는 여러개의이미지를 등록할�
     @Id //기본키
     @GeneratedValue(strategy = GenerationType.IDENTITY)//번호 증가 전략이 데이터베이스를 따라간다
     private int id;
+
     private String caption;//사진 캡션
     private String postImageUrl;// 사진을 전송받아 그 사진을 서버에 특정 폴더에 저장 -db에 그 저장된 경로를 intert
 

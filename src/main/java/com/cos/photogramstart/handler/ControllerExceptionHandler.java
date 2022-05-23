@@ -2,6 +2,7 @@ package com.cos.photogramstart.handler;
 
 
 import com.cos.photogramstart.handler.ex.CustomApiException;
+import com.cos.photogramstart.handler.ex.CustomException;
 import com.cos.photogramstart.handler.ex.CustomValidationApiException;
 import com.cos.photogramstart.handler.ex.CustomValidationException;
 import com.cos.photogramstart.util.Script;
@@ -41,7 +42,19 @@ public class ControllerExceptionHandler {
         //1. 클라이언트에게 응답할때는 스크립트가 좋음
         //2. Ajax 통신 - CMRespDto
         //3. 안드로이드 통신 - CMRespDto
-        return Script.back(e.getMessage().toString());
+
+        if (e.getErrorMap() == null) {
+            return Script.back(e.getMessage());
+        } else {
+            return Script.back(e.getErrorMap().toString());
+        }
+
+    } //자바리턴
+
+    @ExceptionHandler(CustomException.class)
+    public String Exception (CustomException e) {
+        return Script.back(e.getMessage());
+
     } //자바리턴
 
 
@@ -76,3 +89,6 @@ public class ControllerExceptionHandler {
     }//데이터 리턴
 
 }
+
+
+

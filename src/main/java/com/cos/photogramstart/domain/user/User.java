@@ -1,5 +1,6 @@
 package com.cos.photogramstart.domain.user;
 
+import com.cos.photogramstart.domain.image.Image;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Builder //빌더패턴 적용
@@ -35,6 +37,16 @@ public class User {
     private String email;
     private String phone;
     private String gender;
+
+    //나는 연관관계의 주인이 아니다, 그러므로 테이블에 컬럼을 만들지마
+    //user를 select 할떄 해당 user id 로 등록된 image 를 다 가져오시오
+    // Lazy 일때는 user 를 select 할때 해당 user id로 등록된 image 가져 오지마 - 대신 getImages()함수의 image들이 호출될때 가져와
+    // Eager 는 일때는 user 를 select 할때 해당 user id로 등록된 image를 전부 join 해서 가져와
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Image> images;//양방향 맵핑
+
+
+//    private String postImageUrl;
 
     private String profileImageUrl; //사진
     private String role; //권한

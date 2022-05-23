@@ -2,6 +2,7 @@ package com.cos.photogramstart.web;
 
 
 import com.cos.photogramstart.config.auth.PrincipalDetails;
+import com.cos.photogramstart.handler.ex.CustomValidationException;
 import com.cos.photogramstart.service.ImageService;
 import com.cos.photogramstart.web.dto.image.ImageUploadDto;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,10 @@ public class imageController {
 
     @PostMapping("/image")
     public String imageUpload(ImageUploadDto imageUploadDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+
+        if (imageUploadDto.getFile().isEmpty()) {
+            throw new CustomValidationException("이미지가 첨부 안되었습니다.", null);
+        }
         //서비스 호출
         imageService.사진업로드(imageUploadDto, principalDetails);
 
