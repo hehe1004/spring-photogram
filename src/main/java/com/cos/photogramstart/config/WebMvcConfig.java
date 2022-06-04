@@ -9,7 +9,7 @@ import org.springframework.web.servlet.resource.PathResourceResolver;
 @Configuration //ioc 웹에 띄워야하니까
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    @Value("@{file.path")
+    @Value("${file.path}")
     private String uploadFolder;
 
     @Override
@@ -23,5 +23,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .setCachePeriod(60*10*6) // 1시간
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver());
+
+
     }
 }

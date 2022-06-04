@@ -66,7 +66,7 @@
 
 				<c:forEach var="image" items="${user.images}">
 				<div class="img-box">
-					<a href=""> <img src="/upload/${image.postImageUrl}" />
+					<a href=""> <img src="/upload/${image.postImageUrl}"/>
 					</a>
 					<div class="comment">
 						<a href="#" class=""> <i class="fas fa-heart"></i><span>0</span>

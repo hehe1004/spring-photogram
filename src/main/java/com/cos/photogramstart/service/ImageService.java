@@ -8,6 +8,7 @@ import com.cos.photogramstart.web.dto.image.ImageUploadDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,6 +26,8 @@ public class ImageService {
     @Value("${file.path}")
     private String uploadFolder;// = "C:/workspace/springbootwork/upload/"; yml 에 적용 안하면 직접 적어야되서 불편
 
+
+    @Transactional //
     public void 사진업로드(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) {
 
 
@@ -48,7 +51,7 @@ public class ImageService {
         Image image = imageUploadDto.ToEntity(imageFileName, principalDetails.getUser());// 이미지 파일 이름82f2d75a-ab64-4824-8720-e0c66663e90b_반사광3.png
         Image imageEntity = imageRepository.save(image);
         System.out.println("---------ImageService------------");
-        System.out.println(imageEntity);
+//        System.out.println(imageEntity);
         System.out.println("---------ImageService------------");
 
     }

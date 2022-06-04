@@ -36,7 +36,7 @@ public class UserApiController {
             for (FieldError error : bindingResult.getFieldErrors()) {
                 errorMap.put(error.getField(), error.getDefaultMessage());
                 System.out.println("========UserApiController============");
-                System.out.println(error.getDefaultMessage());
+//                System.out.println(error.getDefaultMessage());
                 System.out.println("========UserApiController============");
             }
 
