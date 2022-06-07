@@ -1,6 +1,7 @@
 package com.cos.photogramstart.domain.user;
 
 import com.cos.photogramstart.domain.image.Image;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -43,6 +44,7 @@ public class User {
     // Lazy 일때는 user 를 select 할때 해당 user id로 등록된 image 가져 오지마 - 대신 getImages()함수의 image들이 호출될때 가져와
     // Eager 는 일때는 user 를 select 할때 해당 user id로 등록된 image를 전부 join 해서 가져와
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"user"})
     private List<Image> images;//양방향 맵핑
 
 

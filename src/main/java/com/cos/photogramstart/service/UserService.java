@@ -4,6 +4,7 @@ import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.domain.user.UserRepository;
 import com.cos.photogramstart.handler.ex.CustomException;
 import com.cos.photogramstart.handler.ex.CustomValidationApiException;
+import com.cos.photogramstart.web.dto.user.UserProfileDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,18 +21,26 @@ public class UserService {
 
 
     @Transactional(readOnly = true)
-    public User 회원프로필(int userId) {
+    public UserProfileDto 회원프로필(int pageUserId, int pricipalId) {
+
+        //아이디에 따른 구독, 등록 버튼
+        UserProfileDto dto = new UserProfileDto();
+
 
         //select * from image where userId = :userId;
 
-        User userEntity = userRepository.findById(userId).orElseThrow(() -> {
+        User userEntity = userRepository.findById(pageUserId).orElseThrow(() -> {
             throw new CustomException("해당 프로필 페이지는 없는 페이지");
 
         });
 
+        dto.setUser(userEntity);
+        dto.setPageOwnerState(pageUserId==pricipalId);
+        dto.setImageCount(userEntity.getImages().size());
+
         System.out.println("===================");
 //        userEntity.getImages().get(0);
-        return userEntity;
+        return dto;
 
 
     }

@@ -49,14 +49,16 @@ public class UserApiController {
             System.out.println(userUpdateDto);
             System.out.println(id);
 
-            User userEntity = userService.회원수정(id, userUpdateDto.toEntity());
+
 
             System.out.println(userUpdateDto.toEntity().getId());
             System.out.println("----------------UserApiController-------------------");
+
+            User userEntity = userService.회원수정(id, userUpdateDto.toEntity());
             //세션 정보 변경 해야 실시간 반영
             principalDetails.setUser(userEntity);
 
-            return new CMRespDto<>(1, "회원수정완료", userEntity);
+            return new CMRespDto<>(1, "회원수정완료", userEntity); //응답시에 userEntity 의 모든getter 함수가 호 출되고 JSON 으로 파싱하여 응답
 
         }
         }
