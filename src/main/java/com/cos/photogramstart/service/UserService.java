@@ -24,7 +24,7 @@ public class UserService {
 
 
     @Transactional(readOnly = true)
-    public UserProfileDto 회원프로필(int pageUserId, int pricipalId) {
+    public UserProfileDto 회원프로필(int pageUserId, int principalId) {
 
         //아이디에 따른 구독, 등록 버튼
         UserProfileDto dto = new UserProfileDto();
@@ -38,10 +38,10 @@ public class UserService {
         });
 
         dto.setUser(userEntity);
-        dto.setPageOwnerState(pageUserId==pricipalId);
+        dto.setPageOwnerState(pageUserId==principalId);
         dto.setImageCount(userEntity.getImages().size());
 
-        int subscribeState= subscribeRepository.mSubscribeState(pricipalId, pageUserId);
+        int subscribeState= subscribeRepository.mSubscribeState(principalId, pageUserId);
         int subscribeCount = subscribeRepository.mSubscribeCount(pageUserId);
         dto.setSubscribeState(subscribeState ==1);
         //subscribeState 가 1과 같으면 true

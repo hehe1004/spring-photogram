@@ -1,6 +1,7 @@
 package com.cos.photogramstart.domain.image;
 
 import com.cos.photogramstart.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class Image { // 한명의 유저는 여러개의이미지를 등록할�
     private String postImageUrl;// 사진을 전송받아 그 사진을 서버에 특정 폴더에 저장 -db에 그 저장된 경로를 intert
 
 
+    @JsonIgnoreProperties({"images"})
     @JoinColumn(name="userId") //user는 오브젝트 타입으로 컬럼에 들어갈때 포인트로 들어간다, 그때 이름 정해줘야함
     @ManyToOne
     private User user; //1,1
