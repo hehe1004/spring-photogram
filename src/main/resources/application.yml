@@ -36,5 +36,13 @@ spring:
       name: test
       password: 1234   
 
+#      oauth2:
+#        client:
+#          registration:
+#            facebook:
+#              client-id:
+#                client-secret: ~~
+#                -public-
+
 file:
   path: C:/workspace/springbootwork/upload/

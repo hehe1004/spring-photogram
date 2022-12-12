@@ -1,5 +1,6 @@
 package com.cos.photogramstart.domain.image;
 
+import com.cos.photogramstart.domain.comment.Comment;
 import com.cos.photogramstart.domain.likes.Likes;
 import com.cos.photogramstart.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -41,6 +42,10 @@ public class Image { // 한명의 유저는 여러개의이미지를 등록할�
     private List<Likes> likes;
 
     //댓글
+    @OrderBy("id DESC")
+    @JsonIgnoreProperties({"image"})
+    @OneToMany(mappedBy ="image")
+    private List<Comment> comments;
 
 
     private LocalDateTime createDate;

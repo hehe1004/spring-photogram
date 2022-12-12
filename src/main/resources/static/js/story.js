@@ -1,33 +1,34 @@
 /**
-	2. 스토리 페이지
-	(1) 스토리 로드하기
-	(2) 스토리 스크롤 페이징하기
-	(3) 좋아요, 안좋아요
-	(4) 댓글쓰기
-	(5) 댓글삭제
+ 2. 스토리 페이지
+ (1) 스토리 로드하기
+ (2) 스토리 스크롤 페이징하기
+ (3) 좋아요, 안좋아요
+ (4) 댓글쓰기
+ (5) 댓글삭제
  */
 
-// (1) 스토리 로드하기
+// (0) 현재 로긴한 사용자 아이디
+let principalId = $("#principalId").val();
 
+// (1) 스토리 로드하기
 let page = 0;
+
 function storyLoad() {
 	$.ajax({
 		url: `/api/image?page=${page}`,
 		dataType: "json"
-	}).done(res=> {
-		console.log(res);
+	}).done(res => {
+		//console.log(res);
 		res.data.content.forEach((image)=>{
 			let storyItem = getStoryItem(image);
 			$("#storyList").append(storyItem);
 		});
-	}).fail(error=>{
-		console.log("오류",error);
+	}).fail(error => {
+		console.log("오류", error);
 	});
-
-
 }
-storyLoad();
 
+storyLoad();
 
 function getStoryItem(image) {
 	let item = `<div class="story-list__item">
@@ -61,22 +62,22 @@ function getStoryItem(image) {
 		</div>
 		<div id="storyCommentList-${image.id}">`;
 
-	// image.comments.forEach((comment)=>{
-	// 	item +=`<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
-	// 			<p>
-	// 				<b>${comment.user.username} :</b> ${comment.content}
-	// 			</p>`;
-	//
-	// 	if(principalId == comment.user.id){
-	// 		item += `	<button onclick="deleteComment(${comment.id})">
-	// 									<i class="fas fa-times"></i>
-	// 								</button>`;
-	// 	}
-	//
-	// 	item += `
-	// 		</div>`;
-	//
-	// });
+	image.comments.forEach((comment)=>{
+		item +=`<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
+				<p>
+					<b>${comment.user.username} :</b> ${comment.content}
+				</p>`;
+
+		if(principalId == comment.user.id){
+			item += `	<button onclick="deleteComment(${comment.id})">
+										<i class="fas fa-times"></i>
+									</button>`;
+		}
+
+		item += `	
+			</div>`;
+
+	});
 
 
 	item += `
@@ -88,7 +89,6 @@ function getStoryItem(image) {
 	</div>
 </div>`;
 	return item;
-
 }
 
 // (2) 스토리 스크롤 페이징하기

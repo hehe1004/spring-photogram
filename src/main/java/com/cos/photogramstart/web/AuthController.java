@@ -2,20 +2,15 @@ package com.cos.photogramstart.web;
 
 
 import com.cos.photogramstart.domain.user.User;
-import com.cos.photogramstart.handler.ex.CustomValidationException;
 import com.cos.photogramstart.service.AuthService;
 import com.cos.photogramstart.web.dto.auth.SignupDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Slf4j
 
@@ -44,21 +39,21 @@ public class AuthController {
     @PostMapping("/auth/signup")
     public  String signup(@Validated SignupDto signupDto, BindingResult bindingResult) {
 
-        // 반환타입 string 이지만 앞에 @ResponseBody 가 붙어있으면 데이터 반환
-        if (bindingResult.hasErrors()) {
-            Map<String, String> errorMap = new HashMap<>();
-
-            for (FieldError error : bindingResult.getFieldErrors()) {
-                errorMap.put(error.getField(), error.getDefaultMessage());
-                System.out.println("========AuthController============");
-                System.out.println(error.getDefaultMessage());
-                System.out.println("========AuthController============");
-            }
-
-//            return "오류남";
-//            throw new RuntimeException("유효성 검사 실패");
-            throw new CustomValidationException("유효성 검사 실패", errorMap);
-        }else{
+//        // 반환타입 string 이지만 앞에 @ResponseBody 가 붙어있으면 데이터 반환
+//        if (bindingResult.hasErrors()) {
+//            Map<String, String> errorMap = new HashMap<>();
+//
+//            for (FieldError error : bindingResult.getFieldErrors()) {
+//                errorMap.put(error.getField(), error.getDefaultMessage());
+//                System.out.println("========AuthController============");
+//                System.out.println(error.getDefaultMessage());
+//                System.out.println("========AuthController============");
+//            }
+//
+////            return "오류남";
+////            throw new RuntimeException("유효성 검사 실패");
+//            throw new CustomValidationException("유효성 검사 실패", errorMap);
+//        }else{
             //User <- signupDto
             User user = signupDto.toEntity();
             User userEntity = authService.회원가입(user);
@@ -84,4 +79,4 @@ public class AuthController {
     }
 
 
-}
+//}
